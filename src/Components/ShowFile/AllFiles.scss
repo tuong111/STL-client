@@ -1,0 +1,51 @@
+.container {
+    justify-content: center;
+    // width: 1000px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+
+
+    .column1 {
+        // text-align: center;
+        // align-items: center;
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        margin-top: 20px;
+        font-size: 10px;
+        text-align: center;
+        gap: 10px;
+
+        .item-name {
+            display: block;
+            color: rgb(32, 154, 220);
+        }
+    }
+}
+
+.pdf {
+    margin-top: 30px;
+
+    .react-pdf__Document {
+
+        border-style: solid;
+        border-color: blue;
+
+        .react-pdf__Page {
+            margin-top: 20px;
+            margin-bottom: 20px;
+
+            .react-pdf__Page__annotations {
+                display: none;
+            }
+        }
+    }
+
+    .download {
+        justify-items: center;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}

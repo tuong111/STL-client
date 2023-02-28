@@ -1,0 +1,14 @@
+@import '~antd/dist/antd.css';
+@import '../src/scss/variable';
+@import '../src/scss/login';
+@import '../src/scss/custom';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.App {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
