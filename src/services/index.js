@@ -1,11 +1,11 @@
 import axios from "axios";
-export const baseHost = 'http://localhost:3001'
+export const baseHost = 'https://pib-server.onrender.com'
 export const baseUrl = `${baseHost}/api`
 
 const api = {
-    call : () => {
+    call: () => {
         return axios.create({
-            baseURL : baseUrl
+            baseURL: baseUrl
         })
     }
 }

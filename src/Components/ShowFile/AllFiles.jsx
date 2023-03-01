@@ -41,14 +41,14 @@ export default function FileItem(filesFilter) {
     }
 
     return (
-        <div className='container'>
-            <div className='row w-full gap-3'>
+        <div className='flex flex-row items-center text-center justify-center'>
+            <div className='row w-[90%] gap-3'>
                 {items.map((item, index) =>
                     <div className='item-center text-center justify-center' key={index}>
                         <div className='column1' >
                             <div>
-                                <Link to="/files/details"  state={{ data: item.code , item : item}}
-                                onClick={() =>  docServices.countSeen(item._id)}
+                                <Link to="/files/details" state={{ data: item.code, item: item }}
+                                    onClick={() => docServices.countSeen(item._id)}
                                 >
                                     <img src="/images/pdfexample.gif" width={200} height={250} alt="Logo" />
                                 </Link>
@@ -60,7 +60,7 @@ export default function FileItem(filesFilter) {
                             <p>Lượt tải : {item.dowloadCount}</p>
                             <p className=' text-blue-500'>({item.downloadMode})</p>
                         </div>
-                        
+
                     </div>
                 )}
 

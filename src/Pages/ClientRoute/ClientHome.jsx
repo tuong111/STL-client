@@ -41,8 +41,9 @@ export default function ClientHome(props) {
     return (
         <>
             <ClientHeader />
+
             <div className="flex flex-row">
-                <div
+                {/* <div
                     className="bg-blue-500 h-auto w-[200px] p-5  pt-8 relative duration-300 mt-5"
                 >
                     <div className="justify-start flex flex-row h-full">
@@ -64,7 +65,8 @@ export default function ClientHome(props) {
                             )}
                         </div>
                     </div>
-                </div>
+                </div> */}
+                <SideBar />
                 <AllFile filesFilter={filesFilter} />
             </div>
         </>

@@ -5,7 +5,58 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUserById } from '../store/auth/authAction'
 import { logOut } from '../store/auth/authSlice'
 import { Link } from "react-router-dom";
+import {
+    BsChevronDown,
+} from 'react-icons/bs';
 export default function SideBar(props) {
+    const [subMenuOpen, setSubMenuOpen] = useState(false);
+    const [idMenu, setidMenu] = useState("test");
+    const [menuItems, setmenuItems] = useState([
+        {
+            "code": "AAAAA",
+            "name": "MENU A",
+            "listDoctype": [
+                {
+                    "_id": "123",
+                    "name": "Giải tích",
+                    "code": "GT"
+                },
+                {
+                    "_id": "134",
+                    "name": "Toán học",
+                    "code": "TH"
+                },
+                {
+                    "_id": "12345",
+                    "name": "Ngữ văn",
+                    "code": "NV"
+                }
+            ],
+            src: "Chart_fill"
+        },
+        {
+            "code": "AAAAA",
+            "name": "MENU B",
+            "listDoctype": [
+                {
+                    "_id": "123",
+                    "name": "Kỹ Thuật Số",
+                    "code": "GT"
+                },
+                {
+                    "_id": "134",
+                    "name": "Hoá Đại Cương",
+                    "code": "TH"
+                },
+                {
+                    "_id": "12345",
+                    "name": "Vật lí",
+                    "code": "NV"
+                }
+            ],
+            src: "Folder"
+        }
+    ])
     const token = localStorage.getItem('token')
     const userInfo = useSelector(state => state.auth.userInfo)
     const dispatch = useDispatch()
@@ -93,14 +144,14 @@ export default function SideBar(props) {
             >
                 <img
                     src="../assets/control.png"
-                    className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
+                    className={`absolute cursor-pointer -right-3 w-7 border-dark-purple
            border-2 rounded-full  ${!open && "rotate-180"}`}
                     onClick={() => setOpen(!open)}
                 />
                 <div className="flex gap-x-4 items-center">
                     <img
                         src="../assets/blue-y-logo.jpeg"
-                        className={`cursor-pointer duration-500 w-[60px] ${open && "rotate-[360deg]"
+                        className={`cursor-pointer duration-500 w-[60px] rounded-lg ${open && "rotate-[360deg]"
                             }`}
                     />
                     <h1
@@ -110,23 +161,58 @@ export default function SideBar(props) {
                         Designer
                     </h1>
                 </div>
-                {
+                {/* {
                     !userInfo.name ? <MenuNoLogin /> : <MenuLogin userId={userInfo._id} userName={userInfo?.name} avatar={userInfo.avatar} role={userInfo?.role} />
-                }
+                } */}
                 <ul className="pt-6">
-                    {Menus.map((Menu, index) => (
+                    {menuItems.map((Menu, index) => (
                         <li
                             key={index}
-                            className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
-              ${Menu.gap ? "mt-9" : "mt-2"} ${index === 0 && "bg-light-white"
-                                } `}
                         >
-                            <img src={`../assets/${Menu.src}.png`} />
-                            <span className={`${!open && "hidden"} origin-left duration-200`}>
-                                {Menu.title}
-                            </span>
+                            <div
+                                className={`flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
+                                ${Menu.gap ? "mt-9" : "mt-2"} ${index === 0 && "bg-light-white"
+                                    } `}
+                                onClick={() => setSubMenuOpen(!subMenuOpen) & setidMenu(Menu.name)}
+                            >
+                                <img src={`../assets/${Menu.src}.png`} />
+                                <span className={`${!open && "hidden"} origin-left duration-200`}>
+                                    {Menu.name}
+                                </span>
+                                {Menu.listDoctype && (
+                                    <BsChevronDown
+                                        className={`${subMenuOpen && Menu.name === idMenu && 'rotate-180'}`}
+                                    />
+                                )}
+                            </div>
+                            {Menu.listDoctype && subMenuOpen && open && Menu.name === idMenu && (
+                                <ul>
+                                    {Menu.listDoctype.map((item, idx) => (
+                                        <div key={idx}>
+                                            <li
+                                                className="
+                                                    flex px-5 cursor-pointer text-center text-sm text-gray-200 py-1"
+                                            >
+                                                {item.name}
+                                            </li>
+                                        </div>
+
+                                    )
+                                    )}
+                                </ul>
+                            )}
                         </li>
                     ))}
+                    {/* <ul>
+                        {menuItems.listDoctype.map((item, index) => (
+                            <li
+                                key={index}
+                                className="flex px-5 cursor-pointer text-center text-sm text-gray-200 py-1"
+                            >
+                                {item.name}
+                            </li>
+                        ))}
+                    </ul> */}
                     <li
                         className={` ${open ? "mt-1" : "mt-2"
                             } flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-2`}
@@ -135,9 +221,9 @@ export default function SideBar(props) {
                     </li>
                 </ul>
             </div>
-            <div className="h-screen flex-1 p-7">
+            {/* <div className="h-screen flex-1 p-7">
                 <h1 className="text-2xl font-semibold ">Home Page</h1>
-            </div>
+            </div> */}
         </div>
     );
 };
