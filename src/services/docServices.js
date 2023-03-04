@@ -45,6 +45,13 @@ const docServices = {
             .catch(err => reject(err))
         })
     },
+    getDocByType : async (docTypeID) => {
+        return new Promise((resolve, reject) => {
+            api.call().get('/file/show/doc/' + docTypeID)
+            .then(res => resolve(res.data))
+            .catch(err => reject(err))
+        })
+    },
     countSeen : async (id) => {
         return new Promise((resolve,reject) => {
             api.call().post('/file/show/doc/count', {

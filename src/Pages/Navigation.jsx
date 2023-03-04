@@ -10,6 +10,7 @@ import ClientLogin from './ClientRoute/ClientLogin'
 import ClientRegister from './ClientRoute/ClientRegister'
 import UserDetails from '../Components/User/UserDetails'
 import NewClientHome from './ClientRoute/NewClientHome'
+import UpgradeAccount from './ClientRoute/UpgradeAccount'
 
 export default function Navigation(props) {
 
@@ -25,6 +26,7 @@ export default function Navigation(props) {
             <Route path="/files" element={<Files />} />
             <Route path="/files/details" element={<FileDetails />} />
             <Route path="/user/infomation" element={<UserDetails />} />
+            <Route path='/upgrade' element={<UpgradeAccount/>}/>
         </Routes>
 
     )

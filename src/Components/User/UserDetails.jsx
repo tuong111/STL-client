@@ -6,14 +6,20 @@ import { faArrowRight, faCameraRetro, faCheck } from '@fortawesome/free-solid-sv
 import { useLocation } from 'react-router-dom';
 import { baseUrl } from '../../services';
 import axios from 'axios';
+import userServices from '../../services/userServices';
 
 export default function UserDetails(props) {
+
     const userInfo = useSelector(state => state.auth.userInfo)
     const [user, setUser] = useState({ name: null });
     const location = useLocation();
     const data = location.state?.userId;
     const token = localStorage.getItem('token');
-
+    useEffect(() => {
+        userServices.getUserInfoById(data,token)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+    }, [])
     async function updateUserInfo(e) {
         let userId = location.state?.userId;
         // console.log(userId);
@@ -85,16 +91,16 @@ export default function UserDetails(props) {
         <div className='flex flex-col text-center items-center justify-center'>
             <ClientHeader></ClientHeader>
             <div className='mt-5 p-5 my-16'>
-                <h1 className='text-2xl'>User Infomation</h1>
-                <h3 className='mt-2 opacity-50'>Edit your infomation and updated with us</h3>
+                <h1 className='text-2xl'>Thông tin người dùng</h1>
+                <h3 className='mt-2 opacity-50'>Thay đổi thông tin người dùng của bạn với chúng tôi :</h3>
                 <div className='mt-10 w-[800px] h-auto border border-solid border-gray-400 flex flex-col'>
                     <div className='flex flex-row justify-start p-5'>
-                        <h2>User Details</h2>
+                        <h2>Thông tin người dùng</h2>
                     </div>
                     <div className='flex flex-row justify-start p-5 border-t-2 border-solid'>
                         <div className='grid grid-cols-3 gap-10 text-left w-full items-center'>
-                            <h2>Avatar</h2>
-                            <h2>Upload a picture to personalized your profile</h2>
+                            <h2>Ảnh đại diện</h2>
+                            <h2>Chọn một hình ảnh để làm ảnh đại diện</h2>
                             <div className='flex flex-row justify-center'>
                                 <div className='w-[50px] h-[50px] rounded-lg bg-cyan-300 flex flex-col justify-around'>
                                     <button className='w-full h-full' onClick={(e) => handleUpload()}>
@@ -107,7 +113,7 @@ export default function UserDetails(props) {
                     </div>
                     <div className='flex flex-row justify-start p-5 border-t-2 border-solid'>
                         <div className='grid grid-cols-3 gap-10 text-left w-full items-center'>
-                            <h2>User Name</h2>
+                            <h2>Tên người dùng</h2>
                             <input type="text" value={user.name === null ? userInfo.name : user.name} onChange={e => handleChange(e)} />
                             <div className='flex flex-row justify-center'>
                                 <FontAwesomeIcon icon={faArrowRight} />
@@ -116,8 +122,17 @@ export default function UserDetails(props) {
                     </div>
                     <div className='flex flex-row justify-start p-5 border-t-2 border-solid'>
                         <div className='grid grid-cols-3 gap-10 text-left w-full items-center'>
-                            <h2>User Type</h2>
+                            <h2>Loại tài khoản</h2>
                             <h2>{userInfo.role}</h2>
+                            <div className='flex flex-row justify-center'>
+                                <FontAwesomeIcon icon={faArrowRight} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='flex flex-row justify-start p-5 border-t-2 border-solid'>
+                        <div className='grid grid-cols-3 gap-10 text-left w-full items-center'>
+                            <h2>Lượt tải còn lại</h2>
+                            <h2>{userInfo.download}</h2>
                             <div className='flex flex-row justify-center'>
                                 <FontAwesomeIcon icon={faArrowRight} />
                             </div>
@@ -129,13 +144,13 @@ export default function UserDetails(props) {
                             <div></div>
                             <div className='flex flex-row justify-center'>
                                 <button>
-                                    <a href='/' className='hover:text-cyan-300'>Back</a>
+                                    <a href='/' className='hover:text-cyan-300'>Trở về</a>
                                 </button>
                                 <button
                                     className='w-[90px] h-[50px] bg-slate-200 hover:bg-cyan-300 rounded-lg ml-2'
                                     onClick={e => updateUserInfo(e)}
                                 >
-                                    <span className='mr-2'>Change</span>
+                                    <span className='mr-2'>Thay đổi</span>
                                     <FontAwesomeIcon icon={faCheck} />
                                 </button>
                             </div>

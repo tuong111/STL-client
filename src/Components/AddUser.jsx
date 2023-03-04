@@ -95,6 +95,8 @@ export default function Adduser(props) {
                     <Option value='vip1'>VIP 1</Option>
                     <Option value = 'vip2'>VIP 2</Option>
                     <Option value = 'vip3'>VIP 3</Option>
+                    <Option value = 'vip4'>VIP 4</Option>
+                    <Option value = 'vip5'>VIP 5</Option>
                 </Select>
             </Form.Item>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 2 }}>

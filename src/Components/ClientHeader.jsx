@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserById } from '../store/auth/authAction'
 import { logOut } from '../store/auth/authSlice'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ClientHeader(props) {
     const token = localStorage.getItem('token')
@@ -89,6 +89,7 @@ const MenuNoLogin = () => {
 
 const MenuLogin = ({ userId, userName, avatar, role }) => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     return (
         <div className="hidden w-full md:flex md:items-center md:w-auto" id="menu">
             <ul
@@ -110,6 +111,12 @@ const MenuLogin = ({ userId, userName, avatar, role }) => {
                     >
                         {userName} ({role})
                     </Link>
+                </li>
+                <li>
+                    <a className="md:p-4 py-2 block hover:text-[#007bff] text-[#007bff]" onClick={() => navigate('/upgrade')}>Nâng cấp</a>
+                </li>
+                <li>
+                    <a className="md:p-4 py-2 block hover:text-[#007bff] text-[#007bff]" onClick={() => alert('liên hệ')}>Liên hệ</a>
                 </li>
                 <li>
                     <a className="md:p-4 py-2 block hover:text-[#007bff] text-[#007bff]" onClick={() => dispatch(logOut())}>Thoát</a>

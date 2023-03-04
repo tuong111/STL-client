@@ -8,19 +8,11 @@ import docServices from '../../services/docServices';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function FileItem(filesFilter) {
-    // fetch files from db
     let [items, setItems] = useState([]);
     useEffect(() => { getMenuItems() }, [filesFilter.filesFilter]);
 
-    async function getMenuItems() {
-        if (filesFilter.filesFilter.length === 0) {
-            const response = await fetch(`${baseUrl}/file/show`);
-            // console.log(response);
-            const data = await response.json();
-            setItems(data);
-        } else {
+    const getMenuItems = async () =>{
             setItems(filesFilter.filesFilter);
-        };
     };
 
     //custom react-pdf style
@@ -39,9 +31,15 @@ export default function FileItem(filesFilter) {
     for (let i = 0; i < hideElement.length; i++) {
         hideElement[i].style.display = 'none';
     }
-
+    if (items.length <= 0) {
+        return (
+            <div className='flex flex-row text-center justify-center ml-10'>
+                    <h3>Không có tài liệu nào thuộc loại tài liệu này</h3>
+            </div>
+        );
+    }
     return (
-        <div className='flex flex-row items-center text-center justify-center'>
+        <div className='flex flex-row text-center justify-center items-start'>
             <div className='row w-[90%] gap-3'>
                 {items.map((item, index) =>
                     <div className='item-center text-center justify-center' key={index}>

@@ -82,6 +82,18 @@ const userServices = {
             .catch(err => reject(err))
         })
     }
+    ,
+    updateDownloadCount : async (token,userID) => {
+        return new Promise((resolve,reject)=> {
+            api.call().post(`/auth/updatedownload`,{
+                userID : userID
+            },{
+                headers : {Authorization : `Bearer ${token}`}
+            })
+            .then(res => resolve(res.data))
+            .catch(err => reject(err))
+        })
+    }
 }
 
 

@@ -36,6 +36,7 @@ export default function Listuser(props) {
         setdeleteUserId(_id)
     }
     const handleDeleteUser =  () => {
+        setconfirmDelete(false)
         dispatch(deleteUser({token : token, userID : deleteUserId}))
         .then(
             (res) => {
@@ -109,7 +110,7 @@ export default function Listuser(props) {
             }
             <Table dataSource={listUser} columns={columns} rowKey={(record) => record._id}/>
             <Editmodal isvisible={isvisible_editModal} closeModal={handleCloseModal} data={editData}/>
-            <Modal  visible={confirmDelete} 
+            <Modal  open={confirmDelete} 
                     onCancel={()=> setconfirmDelete(false)}
                     onOk = {handleDeleteUser}
                     >
