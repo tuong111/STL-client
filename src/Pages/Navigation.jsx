@@ -9,8 +9,8 @@ import ClientHome from './ClientRoute/ClientHome'
 import ClientLogin from './ClientRoute/ClientLogin'
 import ClientRegister from './ClientRoute/ClientRegister'
 import UserDetails from '../Components/User/UserDetails'
-import NewClientHome from './ClientRoute/NewClientHome'
 import UpgradeAccount from './ClientRoute/UpgradeAccount'
+import NewClientHome from './NewClientHome/NewClientHome'
 
 export default function Navigation(props) {
 

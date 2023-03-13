@@ -22,6 +22,7 @@ export default function FileDetails(props) {
     const user = useSelector(state => state.auth)
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
+    console.log(item)
 
     function onDocumentLoadSuccess({ numPages }) {
         setNumPages(numPages);
@@ -59,14 +60,18 @@ export default function FileDetails(props) {
             const book = { filesname };
             userServices.updateDownloadCount(user?.token, user?.userInfo?._id)
                 .then(res => {
-                    axios.post(`${baseUrl}/file/show/download`, book, { responseType: 'blob' })
+                    docServices.countDown(item?._id)
+                    .then(
+                        res => {
+                        axios.post(`${baseUrl}/file/show/download`, book, { responseType: 'blob' })
                         .then(res => {
-
                             fileDownload(res.data, filesname);
                         })
                         .catch(err => {
                             console.error(err);
                         });
+                        }
+                    ).catch(err => console.log(err))
                 })
                 .catch(err => console.log(err))
 
@@ -117,8 +122,11 @@ export default function FileDetails(props) {
         <div>
             <ClientHeader />
             <div className='pdf'>
-                <h1 className='text-2xl text-blue-600 border border-solid border-gray-900 p-3'>Tên tài liệu: {data ? data : "no data passing"}</h1>
-                <Document
+                <h1 className='text-2xl text-blue-600 border border-solid border-gray-900 p-3'>Tên tài liệu: {item ? item?.name : "no data passing"}</h1>
+                <img alt={item?.name} src={'https://img.lovepik.com/element/40136/2174.png_860.png'} width={300} className=" mt-3"/>
+                <p className='text-2xl text-blue-600 p-3'>Mô tả tài liệu</p>
+                <p>{item?.note}</p>
+                {/* <Document
                     file={{
                         url:
                             `${baseHost}/${data}.pdf`,
@@ -138,13 +146,13 @@ export default function FileDetails(props) {
                 </div>
                 <p>
                     Page {pageNumber} of {numPages}
-                </p>
+                </p> */}
                 <div className='download'>
                     <h2 className='underline mt-3'>Download to read all the document</h2>
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3" onClick={(e) => download(e)}>Download</button>
                 </div>
             </div>
-            <ClientFooter />
+            <ClientFooter detailpage/>
         </div>
 
     );

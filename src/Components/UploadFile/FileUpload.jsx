@@ -51,7 +51,7 @@ const FileUpload = ({ files, setFiles, removeFile, isClicked, setIsClicked, file
             <div className="file-card">
 
                 <div className="file-inputs">
-                    <input type="file" accept='.pdf' onChange={uploadHandler} />
+                    <input type="file" accept='.pdf,.docx' onChange={uploadHandler} />
                     { !file ? (<button>
                         <i>
                             <FontAwesomeIcon icon={faPlus} />

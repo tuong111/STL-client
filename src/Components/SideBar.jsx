@@ -20,26 +20,47 @@ export default function SideBar({ menus, onSetdoc }) {
     const token = localStorage.getItem('token')
     const dispatch = useDispatch()
     const [open, setOpen] = useState(true);
+    const getIcon = (menu) => {
+        let icon = '';
+        switch (menu.code) {
+            case 'TNTV':
+                icon = `./assets/TNTV.png`
+                break;
+            case 'TNTT':
+                icon = `./assets/TNTT.jpeg`
+                break;
+            case 'VOL':
+                icon = `./assets/VIOL.jpeg`
+                break;
+            case 'VOE':
+                icon = `./assets/VIOE.jpeg`
+                break;
+            default:
+                icon = `./assets/ALL.png`
+                break;
+        }
+        return icon
+    }
     return (
-        <div className="flex">
+        <div className="flex shadow-current">
             <div
                 className={` ${open ? "w-72" : "w-20"
-                    } bg-blue-500 h-full p-5  pt-8 relative duration-300`}
+                    } bg-[#f4f4f4] h-full p-5  pt-8 relative duration-300 shadow-gray-700  shadow-xl rounded-r-md`}
             >
                 <img
                     src="../assets/control.png"
                     className={`absolute cursor-pointer -right-3 w-7 border-dark-purple
-           border-2 rounded-full  ${!open && "rotate-180"}`}
+            border-2 rounded-full bg-slate-300  ${!open && "rotate-180"}`}
                     onClick={() => setOpen(!open)}
                 />
                 <div className="flex gap-x-4 items-center">
                     <img
                         src="../assets/blue-y-logo.jpeg"
-                        className={`cursor-pointer duration-500 w-[60px] rounded-lg ${open && "rotate-[360deg]"
+                        className={`cursor-pointer duration-500 w-[80px] rounded-lg ${open && "rotate-[360deg]"
                             }`}
                     />
                     <h1
-                        className={`text-white origin-left font-medium text-xl duration-200 ${!open && "scale-0"
+                        className={`origin-left font-bold text-xl duration-200 ${!open && "scale-0"
                             }`}
                     >
                         B SHARE
@@ -52,7 +73,7 @@ export default function SideBar({ menus, onSetdoc }) {
                             key={index}
                         >
                             <div
-                                className={`flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
+                                className={`flex rounded-md p-2 cursor-pointer hover:bg-white font-semibold text-sm items-center gap-x-4 
                                 ${Menu.gap ? "mt-9" : "mt-2"} ${index === 0 && "bg-light-white"
                                     } `}
                                 onClick={() => {
@@ -64,7 +85,8 @@ export default function SideBar({ menus, onSetdoc }) {
                                     }
                                 }}
                             >
-                                <img src={`../assets/Folder.png`} />
+                                <img src={getIcon(Menu)} className={`cursor-pointer duration-500 w-[40px] rounded-lg ${!open && "rotate-[360deg]"
+                                    }`} />
                                 <span className={`${!open && "hidden"} origin-left duration-200`}>
                                     {Menu.name}
                                 </span>
@@ -80,7 +102,7 @@ export default function SideBar({ menus, onSetdoc }) {
                                         <div key={idx}>
                                             <li
                                                 className="
-                                                    flex px-5 cursor-pointer text-center text-sm text-gray-200 py-1"
+                                                    flex px-5 cursor-pointer text-center text-sm py-1 hover:bg-slate-50 hover:scale-105 rounded-md font-semibold"
                                                 onClick={() => onSetdoc(item._id)}
                                             >
                                                 {item.name}

@@ -10,6 +10,7 @@ import userServices from '../../services/userServices';
 import { userRemember } from '../../store/auth/authSlice';
 import SideBar from '../../Components/SideBar';
 import ClientFooter from '../../Components/ClientFooter';
+import NewContent from '../NewClientHome/Component/Content';
 
 export default function ClientHome(props) {
     // fetch files from db
@@ -27,7 +28,9 @@ export default function ClientHome(props) {
     }, [])
     useEffect(() => {
         docServices.getAllDoc()
-        .then(res => setFilesFilter(res))
+        .then(res => {
+            console.log('getAllDoc', res)
+            setFilesFilter(res)})
         .catch(err => console.log(err))
     }, [])
 
@@ -35,7 +38,8 @@ export default function ClientHome(props) {
     const filterItems = (docTypeId)  => {
         if (docTypeId == 'all') {
             docServices.getAllDoc()
-            .then(res => setFilesFilter(res))
+            .then(res => {
+                setFilesFilter(res)})
             .catch(err => console.log(err))
         } else {
             docServices.getDocByType(docTypeId)
@@ -56,7 +60,8 @@ export default function ClientHome(props) {
         <ClientHeader />
         <div className="flex flex-row min-h-[650px]">  
             <SideBar menus = {listMenu} onSetdoc={handleSetdoc}/>
-            <AllFile filesFilter={filesFilter}/>
+            {/* <AllFile filesFilter={filesFilter}/> */}
+            <NewContent filesFilter={filesFilter}/>
         </div>
         <ClientFooter/>
         </div>

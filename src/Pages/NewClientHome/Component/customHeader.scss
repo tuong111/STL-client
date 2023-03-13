@@ -1,0 +1,56 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    background-color: #001529;
+    padding: 0 24px;
+
+    .logo {
+        height: 32px;
+        width: 120px;
+        margin-right: 24px;
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .ant-menu {
+        background-color: transparent;
+        border-bottom: none;
+    }
+
+    .ant-menu-item {
+        color: #fff;
+        font-weight: 500;
+
+        &:hover {
+            color: #1890ff;
+            background-color: transparent;
+        }
+    }
+
+    .ant-menu-item.header-right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex: 1;
+    }
+
+    .ant-dropdown-link {
+        display: flex;
+        align-items: center;
+        color: #fff;
+
+        &:hover {
+            color: #1890ff;
+        }
+    }
+
+    .ant-avatar {
+        margin-right: 8px;
+    }
+}

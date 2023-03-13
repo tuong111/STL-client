@@ -1,32 +1,43 @@
+import { FacebookFilled, MailFilled, PhoneFilled, YoutubeFilled } from '@ant-design/icons'
 import React from 'react'
 
-export default function ClientFooter(props) {
+export default function ClientFooter({detailpage}) {
     
 
     return (
-        <footer class="p-3 bg-white shadow md:px-6 md:py-8 dark:bg-gray-900">
-        <div class="sm:flex sm:items-center sm:justify-between">
-        <a href="/" class="flex items-center mb-4 sm:mb-0">
-            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">B SHARE</span>
-        </a>
-        <ul class="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
-            <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+        <div className={`${detailpage && " absolute bottom-0 w-full"}`} >
+        <footer class="p-3 shadow md:px-6 md:py-8 bg-[#58A6D6] ">
+        <div class="sm:flex sm:items-center sm:justify-between flex-wrap">
+            <div>
+            <a href="/" class="flex items-center mb-4 sm:mb-0">
+            <span class="self-center font-semibold whitespace-nowrap dark:text-white">Bản quyền thuộc về công ty TNHHĐT giáo dục TRẠNG NGUYÊN</span>
+            </a>
+            </div>
+            <div>
+            <ul class="flex flex-wrap items-center mb-6 text-white sm:mb-0">
+            <li className=' flex flex-row justify-center items-center gap-1'>
+                <PhoneFilled size={50}/><a href="#" class="mr-4 hover:underline md:mr-6 ">1900633330</a>
             </li>
-            <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+            <li className=' flex flex-row justify-center items-center gap-1'>
+                <MailFilled size={50}/><a href="#" class="mr-4 hover:underline md:mr-6 ">giaovien@trangnguyen.edu.vn</a>
             </li>
-            <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6 ">Licensing</a>
+            </ul>
+            </div>
+            <div>
+            <ul class="flex flex-wrap items-center mb-6 text-white sm:mb-0 gap-3">
+            <li className=' flex flex-row justify-center items-center gap-1'>
+                <span href="#" class="mr-4 hover:underline md:mr-6 ">Theo dõi</span>
             </li>
-            <li>
-                <a href="#" class="hover:underline">Contact</a>
+            <li className=' flex flex-row justify-center items-center gap-3'>
+                <YoutubeFilled size={100}/>
             </li>
-        </ul>
+            <li className=' flex flex-row justify-center items-center gap-3'>
+                <FacebookFilled size={100}/>
+            </li>
+            </ul>
+            </div>
     </div>
-    <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-    <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 3 <a href="/" class="hover:underline">Bshare™</a>. All Rights Reserved.
-    </span>
 </footer>
+</div>
     )
 }

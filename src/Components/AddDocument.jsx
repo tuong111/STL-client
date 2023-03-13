@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, Button, Form, Input, Select } from 'antd';
+import { Alert, Button, Form, Input, Select, Upload } from 'antd';
 import userServices from '../services/userServices';
 import openNotification from '../hooks/openNotification';
 import TextArea from 'antd/lib/input/TextArea';
@@ -9,6 +9,7 @@ import { CloseCircleTwoTone, CheckCircleTwoTone } from '@ant-design/icons';
 import FileUpload from './UploadFile/FileUpload';
 import FileList from './UploadFile/FileList';
 import docServices from '../services/docServices';
+import { UploadOutlined } from '@ant-design/icons';
 
 const { Option } = Select
 
@@ -50,7 +51,7 @@ export default function AddDocument(props) {
                         setFileName(values.document.code)
                         setIsClicked(true)
                         openNotification(<CheckCircleTwoTone twoToneColor={'green'} />, 'Notifications!', res.message)
-                        
+
                     } else {
                         openNotification(<CloseCircleTwoTone twoToneColor={'red'} />, 'Notifications!', res.response.data.message)
                     }
@@ -125,7 +126,7 @@ export default function AddDocument(props) {
                     <Select>
                         {
                             listModeDownload.map(
-                                (item,index) => <Option 
+                                (item, index) => <Option
                                     key={index}
                                     value={item}
                                 >{item}</Option>
@@ -140,7 +141,7 @@ export default function AddDocument(props) {
                     <TextArea />
                 </Form.Item>
                 <div className="files-upload" style={{ width: "50%", marginBottom: '20px', marginLeft: '20px' }}>
-                    <div className="title">Chọn file PDF</div>
+                    <div className="title">Chọn file PDF, Docx</div>
                     <FileUpload
                         files={files} setFiles={setFiles} removeFile={removeFile}
                         isClicked={isClicked} setIsClicked={setIsClicked} fileName={fileName}

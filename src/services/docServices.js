@@ -61,6 +61,15 @@ const docServices = {
             .catch(err => reject(err))
         })
     },
+    countDown : async (id) => {
+        return new Promise((resolve,reject) => {
+            api.call().post('/file/show/doc/downcount', {
+                id : id
+            })
+            .then(res => resolve(res.data))
+            .catch(err => reject(err))
+        })
+    },
     // Menu API : 
     addNewMenu : async (token, input ) => {
         const {code,name,note} = input
