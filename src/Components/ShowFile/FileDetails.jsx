@@ -56,7 +56,7 @@ export default function FileDetails(props) {
     function download(e) {
         if (validate()) {
             e.preventDefault();
-            let filesname = `${data}.pdf`;
+            let filesname = `${data}.${item?.ext}`;
             const book = { filesname };
             userServices.updateDownloadCount(user?.token, user?.userInfo?._id)
                 .then(res => {
@@ -120,7 +120,8 @@ export default function FileDetails(props) {
     }
     return (
         <div style={{
-
+            height : '100%',
+            width : '100%'
         }}>
             <ClientHeader />
             <div style={{

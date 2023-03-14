@@ -3,6 +3,8 @@ import userServices from '../services/userServices';
 import { useSelector, useDispatch } from 'react-redux';
 import openNotification from '../hooks/openNotification';
 import { getAllUser } from '../store/userData/userDataAction';
+import docServices from '../services/docServices';
+import { getAllDoc } from '../store/document/docAction';
 const { Option } = Select
 
 /* eslint-disable no-template-curly-in-string */
@@ -25,15 +27,18 @@ const validateMessages = {
 };
 
 
-export default function Editmodal({ isvisible, closeModal, data, ...props }) {
+export default function EditDocmodal({ isvisible, closeModal, data, ...props }) {
     const token = useSelector(state => state.auth.token)
+    const dispatch = useDispatch()
     const onFinish = async (values) => {
-        const {name, role} = values.user 
+        const {name, downloadMode} = values.document 
         const {_id} = data
-        userServices.updateNameRole(token,_id,name,role)
+        docServices.editDoc(token,data._id,name,downloadMode)
         .then(res => {
             if (res.success) {
+                dispatch(getAllDoc({token : token}))
                 openNotification('success','Notifications !',res.message)
+                
                 
             }else {
                 openNotification('danger','Notifications!',res.message)
@@ -46,7 +51,7 @@ export default function Editmodal({ isvisible, closeModal, data, ...props }) {
         })
     }
     return (
-        <Modal title="Chỉnh sửa thông tin" visible={isvisible}
+        <Modal title="Chỉnh sửa thông tin" open={isvisible}
             onCancel={closeModal}
             footer={[
             ]}>
@@ -57,7 +62,7 @@ export default function Editmodal({ isvisible, closeModal, data, ...props }) {
                 <Typography.Text code >{data?.name}</Typography.Text>
             </Form.Item>
             <Form.Item
-                name={['user', 'name']}
+                name={['document', 'name']}
                 label="Tên mới"
                 rules={[
                     {
@@ -68,17 +73,12 @@ export default function Editmodal({ isvisible, closeModal, data, ...props }) {
                 <Input />
             </Form.Item>
             <Form.Item
-                label="Email"
-            >
-                <Typography.Text code >{data?.email}</Typography.Text>
-            </Form.Item>
-            <Form.Item
                 label="Loại hiện tại"
             >
-                <Typography.Text code >{data?.role}</Typography.Text>
+                <Typography.Text code >{data?.downloadMode}</Typography.Text>
             </Form.Item>
             <Form.Item
-                name={['user', 'role']}
+                name={['document', 'downloadMode']}
                 label = 'Loại thay đổi'
                 rules={[
                     {
@@ -86,12 +86,8 @@ export default function Editmodal({ isvisible, closeModal, data, ...props }) {
                     }
                 ]}>
                 <Select>
-                <Option value='normal'>User thường</Option>
-                    <Option value='vip1'>VIP 1</Option>
-                    <Option value = 'vip2'>VIP 2</Option>
-                    <Option value = 'vip3'>VIP 3</Option>
-                    <Option value = 'vip4'>VIP 3</Option>
-                    <Option value = 'vip5'>VIP 3</Option>
+                <Option value='free'>Free</Option>
+                    <Option value='vip'>Vip</Option>
                 </Select>
             </Form.Item>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset:10 }}>

@@ -34,6 +34,8 @@ export default function Listuser(props) {
         dispatch(getAllUser({ token: token, role: '' }))
             .then(res => {
                 setloading(false)
+                setlistUserCurrent(res.payload)
+                console.log(res)
             })
             .catch(err => {
                 setloading(false)
@@ -129,9 +131,6 @@ export default function Listuser(props) {
         setlistUserCurrent(filteredData);
     };
 
-    const createSheet = (listUserCurrent) => {
-
-    }
     return (
         <div style={{
             justifyContent: 'center',

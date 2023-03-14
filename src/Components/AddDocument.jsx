@@ -38,13 +38,19 @@ export default function AddDocument(props) {
     const [isClicked, setIsClicked] = useState(false);
     const [fileName, setFileName] = useState('')
     const listModeDownload = ['free', 'vip']
+    const [fileExtension, setfileExtension] = useState('')
 
 
     const removeFile = (filename) => {
         setFiles(files.filter(file => file.name !== filename))
     };
+    const setType = (a) => {
+        const fileName = a?.name;
+        const fileExtension = fileName?.split('.').pop();
+        setfileExtension(fileExtension)
+    }
     const onFinish = (values) => {
-        docServices.addDocument(token, values.document)
+        docServices.addDocument(token, values.document,fileExtension)
             .then(
                 (res) => {
                     if (res.success) {
@@ -145,6 +151,7 @@ export default function AddDocument(props) {
                     <FileUpload
                         files={files} setFiles={setFiles} removeFile={removeFile}
                         isClicked={isClicked} setIsClicked={setIsClicked} fileName={fileName}
+                        setType={setType}
                     />
                     {/* <FileList files={files} removeFile={removeFile} /> */}
                 </div>

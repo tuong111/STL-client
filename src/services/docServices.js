@@ -23,14 +23,15 @@ const docServices = {
             .catch(err => reject(err))
         })
     },
-    addDocument : async (token,input) => {
+    addDocument : async (token,input,fileExtention) => {
         const {code,name,type, note} = input
         return new Promise((resolve,reject)=> {
             api.call().post(`/file/show/doc`, {
                 code : code,
                 name : name,
                 type : type,
-                note : note
+                note : note,
+                ext : fileExtention
             }, {
                 headers : {Authorization : `Bearer ${token}`}
             })
@@ -70,6 +71,33 @@ const docServices = {
             .catch(err => reject(err))
         })
     },
+    editDoc : async (token,id, name, note ,downloadMode) => {
+        return new Promise((resolve, reject) => {
+            api.call().put(`/file/show/doc/edit`,{
+                id : id,
+                name : name,
+                note : note,
+                downloadMode : downloadMode
+            },{
+                headers : {Authorization : `Bearer ${token}`}
+            }).then(
+                res => {
+                    const {data} = res 
+                    resolve(data)
+                }
+            ).catch(error => reject(error))
+        })
+    },
+    deleteDoc : async (token, docId) => {
+        return new Promise((resolve,reject)=> {
+            api.call().delete(`/file/show/doc/${docId}`,{
+                headers : {Authorization : `Bearer ${token}`}
+            })
+            .then(res => resolve(res.data))
+            .catch(err => reject(err))
+        })
+    }
+    ,
     // Menu API : 
     addNewMenu : async (token, input ) => {
         const {code,name,note} = input

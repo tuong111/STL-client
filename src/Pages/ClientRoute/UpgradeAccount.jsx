@@ -77,7 +77,7 @@ export default function UpgradeAccount(props) {
                 <ClientHeader />
                 <div className=' flex justify-center mx-3'>
                     <h3 className=' font-bold text-xl'>
-                    Chào {userInfo?.name}, để nâng cấp tài khoản vip bạn vui lòng chọn gói tương ứng : 
+                    Chào <span className=' text-red-500'>{userInfo?.name}</span>, để nâng cấp tài khoản vip bạn vui lòng chọn gói tương ứng : 
                     </h3>
                 </div>
                 <div className="flex flex-row min-h-[650px] justify-center">

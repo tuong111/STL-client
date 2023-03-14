@@ -39,7 +39,7 @@ const NewContent = (filesFilter) => {
     <div style={{ padding: 24, background: '#e5f7ff', minHeight: 600, minWidth: 'calc(100% - 288px)' }}>
       <Row gutter={[16, 32]}>
         {items.map((item) => (
-          <Col key={item._id} xs={24} sm={12} md={8} lg={12} xl={4}>
+          <Col key={item._id} xs={24} sm={16} md={12} lg={8} xl={4}>
             <Link to="/files/details" state={{ data: item.code, item: item }}
                                     onClick={() => docServices.countSeen(item._id)}
             >
@@ -51,7 +51,7 @@ const NewContent = (filesFilter) => {
                 <div style={{display: 'flex', flexDirection : 'row', gap : 5, justifyContent : 'center', alignItems : 'center'}}>
                   <EyeFilled/> <span> {item.seenCount}</span> {item?.isHot && <FireTwoTone twoToneColor={'red'}/>}</div> ,
                 <div style={{display: 'flex', flexDirection : 'row', gap : 5, justifyContent : 'center', alignItems : 'center'}}>
-                <ArrowDownOutlined/> <span> {item.dowloadCount}</span> {item?.isMostDown && <FireTwoTone twoToneColor={'orange'}/>}</div>,
+                <ArrowDownOutlined/> <span> {item.dowloadCount}</span> {item?.isMostDown && <FireTwoTone twoToneColor={'red'}/>}</div>,
               ]}
             >
               <Card.Meta title={item.name} description={item.note} />
