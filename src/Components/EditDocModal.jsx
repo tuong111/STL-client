@@ -31,9 +31,9 @@ export default function EditDocmodal({ isvisible, closeModal, data, ...props }) 
     const token = useSelector(state => state.auth.token)
     const dispatch = useDispatch()
     const onFinish = async (values) => {
-        const {name, downloadMode} = values.document 
+        const {name, downloadMode, note} = values.document 
         const {_id} = data
-        docServices.editDoc(token,data._id,name,downloadMode)
+        docServices.editDoc(token,data._id,name,note,downloadMode)
         .then(res => {
             if (res.success) {
                 dispatch(getAllDoc({token : token}))
@@ -64,6 +64,17 @@ export default function EditDocmodal({ isvisible, closeModal, data, ...props }) 
             <Form.Item
                 name={['document', 'name']}
                 label="Tên mới"
+                rules={[
+                    {
+                        required: true,
+                    },
+                ]}
+            >
+                <Input />
+            </Form.Item>
+            <Form.Item
+                name={['document', 'note']}
+                label="Mô tả mới"
                 rules={[
                     {
                         required: true,
