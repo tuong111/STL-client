@@ -119,38 +119,24 @@ export default function FileDetails(props) {
         return true
     }
     return (
-        <div>
+        <div style={{
+
+        }}>
             <ClientHeader />
+            <div style={{
+                width: '100%',
+                justifyContent : 'center'                                                                   
+            }}>
             <div className='pdf'>
                 <h1 className='text-2xl text-blue-600 border border-solid border-gray-900 p-3'>Tên tài liệu: {item ? item?.name : "no data passing"}</h1>
-                <img alt={item?.name} src={'https://img.lovepik.com/element/40136/2174.png_860.png'} width={300} className=" mt-3"/>
+                <img alt={item?.name} src={'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/document-app-icon-or-logo-icon-design-template-7b6cac8de4b9abdd949f7643fe00924e_screen.jpg?ts=1576967977'} width={300} className=" mt-3"/>
                 <p className='text-2xl text-blue-600 p-3'>Mô tả tài liệu</p>
                 <p>{item?.note}</p>
-                {/* <Document
-                    file={{
-                        url:
-                            `${baseHost}/${data}.pdf`,
-                    }}
-                    onLoadSuccess={onDocumentLoadSuccess}
-                    onContextMenu={(e) => e.preventDefault()}
-                >
-                    <Page pageNumber={pageNumber} />
-                </Document>
-                <div className="flex flex-row gap-1">
-                    <button disabled={pageNumber == 1} onClick={goToPrevPage} className="bg-blue-50 w-10">
-                        {'<'}
-                    </button>
-                    <button disabled={pageNumber >= numPages} onClick={goToNextPage} className="bg-blue-50 w-10">
-                        {'>'}
-                    </button>
-                </div>
-                <p>
-                    Page {pageNumber} of {numPages}
-                </p> */}
                 <div className='download'>
                     <h2 className='underline mt-3'>Download to read all the document</h2>
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3" onClick={(e) => download(e)}>Download</button>
                 </div>
+            </div>
             </div>
             <ClientFooter detailpage/>
         </div>
